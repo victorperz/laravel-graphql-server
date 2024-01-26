@@ -1,0 +1,5 @@
+{
+    "intelephense.phpdoc.useFullyQualifiedNames": true,
+    "intelephense.trace.server": "messages",
+    "intelephense.completion.fullyQualifyGlobalConstantsAndFunctions": true
+}
