@@ -7,55 +7,162 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Laravel
+Desarrollar un servidor Laravel GraphQL 
+Laravel 8  php 7.4.3 LARAGON
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Crear proyecto
+composer create-project --prefer-dist laravel/laravel:^8.0  laravel-graphql-server
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Instalar paquete lighthouse (dependencia)
+composer require nuwave/lighthouse
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Instalar Laravel GraphQL Playground
+composer require mll-lab/laravel-graphql-playground
 
-## Learning Laravel
+Publicar el schema de lighthouse
+php artisan vendor:publish --tag=lighthouse-schema
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Autocompletar toda la informacion
+composer require --dev haydenpierce/class-finder /// instalar la version anterior 0.4
+composer require haydenpierce/class-finder:^0.4 --update-with-dependencies
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+php artisan lighthouse:ide-helper
 
-## Laravel Sponsors
+crear una base de datos laravel_graphql_server y corremos las migraciones
+php artisan migrate
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Desplegamos la consolola de GraphQL en la ruta del proyecto :
+http://laravel-graphql-server.test/graphql-playground
 
-### Premium Partners
+Crear 10 usuarios con tinker
+php artisan tinker 
+App\Models\User::factory(10)->create()
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[OP.GG](https://op.gg)**
+Crear migracion, factory y modelo post
+php artisan make:model -mf Post
+Crear migracion, factory y modelo Comment
+php artisan make:model -mf Comment
 
-## Contributing
+Crear factory y relaciones ejecutar las migraciones
+php artisan migrate:fresh --seed
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
 
-## Code of Conduct
+<!-- QUERY graphql -->
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+<!-- --- GET USERS ---
+{
+  users{
+    paginatorInfo{
+      count
+      currentPage
+      hasMorePages
+      lastPage
+      perPage
+      total
+    }
+    data{
+      id
+      name
+      email
+      posts {
+        id
+        title
+        content
+      }
+    }
+  }
+}
+--- end ---
 
-## Security Vulnerabilities
+--- GET COMMENTS ---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+{
+  comments{
+    paginatorInfo{
+      count
+      currentPage
+      hasMorePages
+      lastPage
+      perPage
+      total
+    }
+    data{
+      id
+      reply
+      post{
+        title
+        content
+        author{
+          id
+          name
+          email
+        }
+      }
+    }
+  }
+}
+--- end ---
 
-## License
+--- GET USER ID ---
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+ {
+  user(id: 1){
+    name
+    email
+    created_at
+    posts{
+      id
+      title
+      comments{
+        id
+        reply
+      }
+    }
+  }
+}
+--- end --- -->
+
+<!-- Mutaciones graphql  -->
+
+<!-- --- createPost ---
+mutation{
+  createPost(
+    author_id:1,
+    title:"Nuevo titulo regitrado new new",
+    content:"hola k ase"){
+    id
+    title
+    content
+    author{
+      id
+      name
+    }
+  }
+}
+--- end ---
+
+--- updatePost ---
+
+mutation{
+  updatePost(
+    id: 32
+    title: "Nuevo post id 32 actualizado a las 7:20"
+    content:"Este es un nuevo contenido"
+    author_id:7
+  ){
+    id
+    title
+    content
+  }
+}
+--- end ---
+
+--- deletePost ---
+mutation{
+  deletePost(id:1){
+    id
+		title
+  }
+}
+--- end ---
+ -->
