@@ -1,5 +1,5 @@
-### Desarrollar un servidor Laravel GraphQL 
-## Laravel 8  php 7.4.3 LARAGON
+## Desarrollar un servidor Laravel GraphQL 
+### Laravel 8  php 7.4.3 LARAGON
 
 Crear proyecto
 composer create-project --prefer-dist laravel/laravel:^8.0  laravel-graphql-server
@@ -38,9 +38,9 @@ Crear factory y relaciones ejecutar las migraciones
 php artisan migrate:fresh --seed
 
 
-### QUERY graphql
-
-## GET USERS 
+## QUERY graphql
+```graphql
+### GET USERS 
 {
   users{
     paginatorInfo{
@@ -63,9 +63,9 @@ php artisan migrate:fresh --seed
     }
   }
 }
-## end 
+### end 
 
-## GET COMMENTS
+### GET COMMENTS
 
 {
   comments{
@@ -92,9 +92,9 @@ php artisan migrate:fresh --seed
     }
   }
 }
-## end
+### end
 
-## GET USER ID 
+### GET USER ID 
 
  {
   user(id: 1){
@@ -111,11 +111,11 @@ php artisan migrate:fresh --seed
     }
   }
 }
-## end 
+### end 
 
-### Mutaciones graphql 
+## Mutaciones graphql 
 
-## createPost
+### createPost
 mutation{
   createPost(
     author_id:1,
@@ -130,9 +130,9 @@ mutation{
     }
   }
 }
-## end 
+### end 
 
-## updatePost 
+### updatePost 
 
 mutation{
   updatePost(
@@ -146,9 +146,9 @@ mutation{
     content
   }
 }
-## end 
+### end 
 
-## deletePost 
+### deletePost 
 
 mutation{
   deletePost(id:1){
@@ -156,4 +156,4 @@ mutation{
 		title
   }
 }
-## end 
+### end 
