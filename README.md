@@ -1,3 +1,5 @@
+<body>
+
 Desarrollar un servidor Laravel GraphQL 
 Laravel 8  php 7.4.3 LARAGON
 
@@ -156,4 +158,4 @@ mutation{
   }
 }
 --- end ---
-
+</body>
