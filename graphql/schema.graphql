@@ -13,7 +13,8 @@ type Query {
 type Mutation {
     createPost(author_id: Int!, title: String!, content: String!): Post @create
     updatePost(id: ID!, author_id: Int, title: String!, content: String): Post @update
-}
+    deletePost(id: ID!): Post @delete
+  }
 
 type User {
     "! significa que no pueden ser valores NULOS"
