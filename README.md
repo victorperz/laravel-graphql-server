@@ -1,12 +1,3 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
-
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
-
 Desarrollar un servidor Laravel GraphQL 
 Laravel 8  php 7.4.3 LARAGON
 
@@ -47,9 +38,9 @@ Crear factory y relaciones ejecutar las migraciones
 php artisan migrate:fresh --seed
 
 
-<!-- QUERY graphql -->
+QUERY graphql
 
-<!-- --- GET USERS ---
+--- GET USERS ---
 {
   users{
     paginatorInfo{
@@ -120,11 +111,11 @@ php artisan migrate:fresh --seed
     }
   }
 }
---- end --- -->
+--- end ---
 
-<!-- Mutaciones graphql  -->
+Mutaciones graphql 
 
-<!-- --- createPost ---
+--- createPost ---
 mutation{
   createPost(
     author_id:1,
@@ -165,4 +156,4 @@ mutation{
   }
 }
 --- end ---
- -->
+
